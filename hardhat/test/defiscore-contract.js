@@ -7,20 +7,21 @@ const {
   SDK: { ContractFunctionParameters, AccountId },
 } = require("hashgraph-support");
 
-describe("Testing Helloworld Ownable contracts", function () {
+describe("Testing a contract", function () {
   const destinationNetwork = Config.network;
   const client = Network.getNodeNetworkClient(destinationNetwork);
   const hashgraph = Hashgraph(client);
 
-  const contractId = process.env.HELLOWORLD_CONTRACT_ID;
+  const contractId = process.env.DEFISCORE_CONTRACT_ID;
 
   if (!contractId) {
     throw Error(
-      "HELLOWORLD_CONTRACT_ID: NOT FOUND IN ENV, deploy with 'make deploy-test CONTRACT=\"ContractName\"' to generate in ENV"
+      "DEFISCORE_CONTRACT_ID: NOT FOUND IN ENV, deploy with 'make deploy-test CONTRACT=\"ContractName\"' to generate in ENV"
     );
   }
 
-  it("A contract can get owner address", async () => {
+  it("A contract will run a test", async () => {
+    // Will run if a contract is Ownable
     const response = await hashgraph.contract.query({
       contractId: contractId,
       method: "owner",
@@ -30,4 +31,16 @@ describe("Testing Helloworld Ownable contracts", function () {
 
     expect(accountId.toString()).to.equal(process.env.HEDERA_ACCOUNT_ID);
   });
+
+  // it("A contract can call a contract with params ", async () => {
+  //
+  //   const response = await hashgraph.contract.call({
+  //     contractId: contractId,
+  //     method: "a method",
+  //     params: new ContractFunctionParameters()
+  //       .addInt64(2)
+  //   })
+  //
+  //   expect(response).to.be.true;
+  // })
 });

@@ -1,7 +1,7 @@
 # Deploy a smart contract to Hedera testnet
 deploy:
-	hardhat compile
-	hardhat deploy --contract $(CONTRACT)
+	npx hardhat compile
+	npx hardhat deploy --contract $(CONTRACT)
 
 # Target a specific contract based on the "test/*-contract.js" format
 test-contract:

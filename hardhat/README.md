@@ -22,7 +22,7 @@ You can see all the commands in the Makefile, but this is effectively what happe
 This command deploys a smart contract to Hedera Testnet, it compiles the contract, then deploys.
 
 ```
-make deploy CONTRACT=HTS
+make deploy CONTRACT=DefiScore
 ```
 
 You can switch out the **CONTRACT** parameter to the name of whatever contract you are working on, after the automatic compile step it will attempt to intelligently seek the bytecode that was previously generated then deploy.
@@ -62,42 +62,6 @@ Furthermore, when running these command a number of interesting things will happ
 - Newly generated contract ids will be injected into your .env and related test classes.
 
 _tl;dr, create a new smart contract and run this command and the system will generate sensible and intelligent defaults._
-
-# Stakeable Basic Contract
-
-This is the deployed stakable project for owner `0.01156`, that you may reference as a user.
-
-See the Demo Projects that have been added in the `add-demo-projects` hardhat command to get started claiming and staking/unstaking.
-
-I would implore you to read the JS tests for interacting with the contract, at use that as the basis for the frontend.
-
-```
-STAKABLEPROJECT_CONTRACT_ID=0.0.34168439
-```
-
-However, once you have configured your environment with your Hedera Creds you may deploy the contract run the tests and ensure that all the demo projects are in place, so that a fresh contract is owned by your credentials/account keys.
-
-This is a one step command to get everything started for you.
-
-```
-make deploy-test-stakable-base-contract
-```
-
-## Other contracts with tests, to use as inspiration
-
-### Timelock example
-
-As part of our staking contract We are aiming to add time lock capabilities for modifying longtime locks for the ability for users to undertake their value from a given project. This is a temporary measure for the basis of the hackathon.
-
-```
-make deploy-test-timelock
-```
-
-## Notes
-
-This is early in development there isn't method binding to elegantly call methods in a fluent manner, But it's nice to have little pipeline to compile, deploy, and test.
-
-Currently, our contract deploy functionality is based off of a constructor so if you are targeting different constructors you'll need to modify the deploy script.
 
 # How to use setup your env + Hardhat commands:
 
