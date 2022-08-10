@@ -27,7 +27,7 @@ contract DefiScore {
 
     constructor() {
         price = 1;
-        creditScores["0000000000000000000000000000000002da48a1"] = 800;
+        creditScores[address(0x0000000000000000000000000000000002da48a1)] = 800;
     }
 
     function getAuthorizedToRead(address user) public view returns (bool) {
@@ -40,8 +40,8 @@ contract DefiScore {
         return creditScores[user];
     }
 
-    function getReadCreditScores(address user) public view returns (address[] memory) {
-        return readCreditScores[user];
+    function getReadCreditScores() public view returns (address[] memory) {
+        return readCreditScores[msg.sender];
     }
 
     function givePermission() public {
