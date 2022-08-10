@@ -8,13 +8,12 @@ import {
     ContractFunctionResult
 } from '@hashgraph/sdk';
 
-const contractId = '0.0.47861487';
-
+const contractId = process.env.REACT_APP_CONTRACT_ID;
 const operatorId = process.env.REACT_APP_OPERATOR_ID;
 const operatorPK = process.env.REACT_APP_OPERATOR_PRIVATE_KEY;
 
 // If we weren't able to grab it, we should throw a new error
-if (operatorId == null || operatorPK == null) {
+if (operatorId == null || operatorPK == null || contractId == null) {
   throw new Error(
     "Environment variables myAccountId and myPrivateKey must be present"
   );
@@ -45,7 +44,7 @@ export const useReadContract = () => {
             }
         }
         init();
-        
+
     }, []);
   return { result };
 };
