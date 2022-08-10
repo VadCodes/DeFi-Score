@@ -6,14 +6,15 @@ import "hardhat/console.sol";
 
 contract DefiScore {
     mapping(address => bool) public authorizedToRead;
-    mapping(address => uint16) public creditScores;
     mapping(address => address[]) public readCreditScores;
+        mapping(address => uint16) private creditScores;
 
     // The minimum price to pay user for his credit score
     uint256 public price;
 
     event ReadCreditScore(address read, address by);
     event GivePermission(address user);
+    event RevokePermission(address user);
     event PriceUpdated(uint256 price);
 
     /**
@@ -25,15 +26,32 @@ contract DefiScore {
     }
 
     constructor() {
-         price = 1;
-        // creditScores["address"] = 900;
-        // creditScores["address"] = 600;
-        // creditScores["address"] = 300;
+        price = 1;
+        creditScores["0000000000000000000000000000000002da48a1"] = 800;
+    }
+
+    function getAuthorizedToRead(address user) public view returns (bool) {
+        return authorizedToRead[user];
+    }
+    
+
+    function getCreditScores(address user) public view returns (uint16) {
+        require(msg.sender == user, 'You can only read your own credit score');
+        return creditScores[user];
+    }
+
+    function getReadCreditScores(address user) public view returns (address[] memory) {
+        return readCreditScores[user];
     }
 
     function givePermission() public {
         authorizedToRead[msg.sender] = true;
         emit GivePermission(msg.sender);
+    }
+
+    function revokePermission() public {
+        authorizedToRead[msg.sender] = false;
+        emit RevokePermission(msg.sender);
     }
 
     function getCreditScore(address user) public payable minimumPrice returns (uint16) {
