@@ -1,5 +1,51 @@
-import { AccountId } from "@hashgraph/sdk";
-import React, { useState } from "react";
+import {
+  AccountId,
+  Client, ContractExecuteTransaction,
+  ContractFunctionParameters, TransactionResponse
+} from "@hashgraph/sdk";
+import { useState } from "react";
+
+const contractId = process.env.REACT_APP_CONTRACT_ID;
+const operatorId = process.env.REACT_APP_CONSUMER_ACCOUNT_ID;
+const operatorPK = process.env.REACT_APP_CONSUMER_PRIVATE_KEY;
+
+// If we weren't able to grab it, we should throw a new error
+if (operatorId == null || operatorPK == null || contractId == null) {
+  throw new Error(
+    "Environment variables operatorId and operatorPK and contractID must be present"
+  );
+}
+
+// Create our connection to the Hedera network
+// The Hedera JS SDK makes this really easy!
+const client = Client.forTestnet();
+
+client.setOperator(operatorId, operatorPK);
+
+const readCreditScore = async (address: string) => {
+  try {
+    const contractExecuteTx = new ContractExecuteTransaction({ amount: 1 })
+      .setContractId(contractId)
+      .setGas(500000)
+      .setFunction(
+        "getCreditScore",
+        new ContractFunctionParameters().addAddress(address)
+      );
+
+    const r: TransactionResponse = await contractExecuteTx.execute(client);
+
+    alert(
+      `credit score is ${(await r.getRecord(client)).contractFunctionResult
+        ?.getUint40()
+        .toNumber()}`
+    );
+  } catch (err: any) {
+    alert(
+      `you are not allowed to consult`
+    );
+    console.log(err);
+  }
+};
 
 function VendorDashboard() {
   const [address, setAddress] = useState(
@@ -29,7 +75,7 @@ function VendorDashboard() {
       </div>
       <button
         className="btn btn-blue mt-6"
-        onClick={() => console.log("get the score for " + address)}
+        onClick={() => readCreditScore(address)}
       >
         Consult score
       </button>

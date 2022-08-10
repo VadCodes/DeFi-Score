@@ -34,10 +34,13 @@ export const useReadContract = () => {
         const init = async () => {
             try {
                 const response = await new ContractCallQuery()
-                    .setContractId(contractId)
-                    .setGas(25000)
-                    .setFunction('getReadCreditScores', new ContractFunctionParameters().addAddress(solidityAddress))
-                    .execute(client);
+                  .setContractId(contractId)
+                  .setGas(500000)
+                  .setFunction(
+                    "getReadCreditScores",
+                    new ContractFunctionParameters().addAddress(solidityAddress)
+                  )
+                  .execute(client);
                 setResult(response);
             } catch (err: any) {
                 console.log(err);

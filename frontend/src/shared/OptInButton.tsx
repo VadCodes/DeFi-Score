@@ -1,10 +1,5 @@
-import { useEffect, useState } from 'react';
 
-import {
-    AccountId,
-    Client,
-    ContractExecuteTransaction
-} from '@hashgraph/sdk';
+import { Client, ContractExecuteTransaction } from "@hashgraph/sdk";
 
 const contractId = process.env.REACT_APP_CONTRACT_ID;
 const operatorId = process.env.REACT_APP_CONSUMER_ACCOUNT_ID;
@@ -24,26 +19,25 @@ const client = Client.forTestnet();
 client.setOperator(operatorId, operatorPK);
 
 const onSubmitOptIn = async () => {
-    try {
-	const contractExecuteTx = new ContractExecuteTransaction()
-		.setContractId(contractId)
-		.setGas(50000)
-		.setFunction("givePermission")
+  try {
+    const contractExecuteTx = new ContractExecuteTransaction()
+      .setContractId(contractId)
+      .setGas(500000)
+      .setFunction("givePermission");
 
-        await contractExecuteTx.execute(client)
+    const r = await contractExecuteTx.execute(client);
+    console.log(r);
 
-        alert("permission given !")
-    } catch (err: any) {
-        console.log(err)
-    }
+    alert("permission given !");
+  } catch (err: any) {
+    console.log(err);
+  }
 };
 
 export const OptInButton = () => {
-    
-  return  (<button
-  className="btn btn-blue m-6"
-  onClick={() => onSubmitOptIn()}
->
-  Give permission to read my credit score
-</button>);
+  return (
+    <button className="btn btn-blue m-6" onClick={() => onSubmitOptIn()}>
+      Give permission to read my credit score
+    </button>
+  );
 };

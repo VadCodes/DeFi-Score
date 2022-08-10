@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
 
 import {
-    AccountId,
-    Client,
-    ContractExecuteTransaction
+  Client,
+  ContractExecuteTransaction
 } from '@hashgraph/sdk';
 
 
@@ -27,9 +25,9 @@ client.setOperator(operatorId, operatorPK);
 const onSubmitOptOut = async () => {
     try {
         const contractExecuteTx = new ContractExecuteTransaction()
-            .setContractId(contractId)
-            .setGas(50000)
-            .setFunction("revokePermission")
+          .setContractId(contractId)
+          .setGas(500000)
+          .setFunction("revokePermission");
     
             await contractExecuteTx.execute(client)
     
