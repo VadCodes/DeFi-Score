@@ -37,7 +37,7 @@ const onSubmitOptIn = async () => {
 export const OptInButton = () => {
   return (
     <button className="btn btn-blue m-6" onClick={() => onSubmitOptIn()}>
-      Give permission to read my credit score
+      Opt-In
     </button>
   );
 };

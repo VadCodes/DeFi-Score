@@ -33,7 +33,7 @@ function ConsumerDashboard() {
 
   return (
     <div className="consumer-dashboard">
-      <h1 className="text-3xl font-bold underline">
+      <h1 className="text-2xl font-bold underline">
         My Credit Score Dashboard
       </h1>
       <p className="mt-6">
@@ -45,10 +45,10 @@ function ConsumerDashboard() {
 
       <OptOutButton />
 
-      <h1 className="mt-6 text-3xl font-bold underline">Consult History</h1>
+      <h1 className="mt-6 text-2xl font-bold underline">Vendor Inquiries</h1>
 
       <button onClick={() => refreshHistory()} className="btn btn-blue m-6">
-        refresh history
+        refresh inquiries
       </button>
       <div className="mt-6 consult-history">
         <ul className="list-disc list-inside text-slate-700 bg-white rounded-xl shadow-lg ring-1 ring-slate-900/5 p-4 pl-8 dark:bg-slate-800 dark:ring-0 dark:highlight-white/5 dark:text-slate-400">

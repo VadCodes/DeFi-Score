@@ -39,10 +39,9 @@ const onSubmitOptOut = async () => {
 
 export const OptOutButton = () => {
     
-  return(<button
-  className="m-6 btn btn-blue"
-  onClick={() => onSubmitOptOut()}
->
-  Revoke permission to read my credit score
-</button>)
+  return (
+    <button className="m-6 btn btn-blue" onClick={() => onSubmitOptOut()}>
+      Opt-Out
+    </button>
+  );
 };
