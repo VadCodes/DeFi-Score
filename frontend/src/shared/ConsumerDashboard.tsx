@@ -29,7 +29,7 @@ function ConsumerDashboard() {
             "BankA (0xasgbondmoiemfoseifmosem123456)",
             "BankB (0xasgbondmoiemfoseifmosem123452)",
           ].map((address) => (
-            <li>{address}</li>
+            <li key={address}>{address}</li>
           ))}
         </ul>
       </div>

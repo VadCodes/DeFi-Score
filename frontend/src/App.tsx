@@ -1,11 +1,10 @@
-import React from "react";
 import "./App.css";
-import ConsumerDashboard from "./shared/ConsumerDashboard";
+import LoginPage from "./shared/LoginPage";
 
 function App() {
   return (
     <div className="App">
-      <ConsumerDashboard></ConsumerDashboard>
+      <LoginPage />
     </div>
   );
 }

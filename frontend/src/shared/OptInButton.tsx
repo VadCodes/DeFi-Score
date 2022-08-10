@@ -7,8 +7,8 @@ import {
 } from '@hashgraph/sdk';
 
 const contractId = process.env.REACT_APP_CONTRACT_ID;
-const operatorId = process.env.REACT_APP_OPERATOR_ID;
-const operatorPK = process.env.REACT_APP_OPERATOR_PRIVATE_KEY;
+const operatorId = process.env.REACT_APP_CONSUMER_ACCOUNT_ID;
+const operatorPK = process.env.REACT_APP_CONSUMER_PRIVATE_KEY;
 
 // If we weren't able to grab it, we should throw a new error
 if (operatorId == null || operatorPK == null || contractId == null) {
